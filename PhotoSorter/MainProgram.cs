@@ -100,6 +100,7 @@ namespace PhotoSorter
                 Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(item.filePath, Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
                 filesDeleted++;
             }
+            Properties.Settings.Default.Save();
         }
 
         private void NextButton_Click(object sender, EventArgs e)

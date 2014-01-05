@@ -22,10 +22,30 @@ namespace PhotoSorter
 
             folderPathTextBox.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             outputPathTextBox.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            if (Properties.Settings.Default.lastInputPath == "NULL")
+            {
+                Properties.Settings.Default.lastInputPath = folderPathTextBox.Text;
+            }
+            else
+            {
+                folderPathTextBox.Text = Properties.Settings.Default.lastInputPath;
+            }
+            if (Properties.Settings.Default.lastOutputPath == "NULL")
+            {
+                Properties.Settings.Default.lastOutputPath = outputPathTextBox.Text;
+            }
+            else
+            {
+                outputPathTextBox.Text = Properties.Settings.Default.lastOutputPath;
+            }
+            Properties.Settings.Default.Save();
         }
 
         private void browserButton_Click(object sender, EventArgs e)
         {
+            folderBrowserDialog.SelectedPath = Properties.Settings.Default.lastInputPath;
+
             folderBrowserDialog.ShowDialog();
             folderPathTextBox.Text = folderBrowserDialog.SelectedPath;
             filePath.filePath = folderPathTextBox.Text;
@@ -35,6 +55,10 @@ namespace PhotoSorter
         {
             filePath.filePath = folderPathTextBox.Text;
             outputPath.filePath = outputPathTextBox.Text;
+
+            Properties.Settings.Default.lastInputPath = folderPathTextBox.Text;
+            Properties.Settings.Default.lastOutputPath = outputPathTextBox.Text;
+            Properties.Settings.Default.Save();
 
             DialogResult = System.Windows.Forms.DialogResult.OK;
             Close();
