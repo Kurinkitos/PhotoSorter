@@ -17,6 +17,7 @@ namespace PhotoSorter
         List<Picture> pictureInput = new List<Picture>();
         List<Picture> savedPictures = new List<Picture>();
         List<Picture> picturesForDeletion = new List<Picture>();
+        Picture undoBuffer;
         FilePath outputFolder;
         int filesSaved = 0, filesDeleted = 0;
         public MainWindow(FilePath filePathIn, FilePath outputPathIn)
@@ -107,6 +108,7 @@ namespace PhotoSorter
         {
             if (pictureInput.Count() > 0)
             {
+                undoBuffer = pictureInput[0];
                 requestNextPicture();
             }
         }
@@ -116,6 +118,7 @@ namespace PhotoSorter
             if (pictureInput.Count() > 0)
             {
                 savedPictures.Add(pictureInput[0]);
+                undoBuffer = pictureInput[0];
                 requestNextPicture();
             }
         }
@@ -132,6 +135,7 @@ namespace PhotoSorter
             if (pictureInput.Count() > 0)
             {
                 picturesForDeletion.Add(pictureInput[0]);
+                undoBuffer = pictureInput[0];
                 requestNextPicture();
             }
         }
@@ -143,6 +147,29 @@ namespace PhotoSorter
             ProgramDoneDialog dialog = new ProgramDoneDialog(filesSaved, filesDeleted);
             dialog.ShowDialog();
             Close();
+        }
+
+        private void undoButton_Click(object sender, EventArgs e)
+        {
+            if (undoBuffer != null)
+            {
+                savedPictures.Remove(undoBuffer);
+
+                picturesForDeletion.Remove(undoBuffer);
+
+
+                pictureInput.Insert(0, undoBuffer);
+                fileCountTextBox.Text = pictureInput.Count().ToString();
+                CurrentPhotoBox.Load(pictureInput[0].filePath);
+                currentFolder.Text = pictureInput[0].filePath;
+
+                widthTextBox.Text = CurrentPhotoBox.Image.Width.ToString() + "px";
+                heightTextBox.Text = CurrentPhotoBox.Image.Height.ToString() + "px";
+
+                lastModifiedTextBox.Text = pictureInput[0].lastModified.ToString();
+
+                undoBuffer = null;
+            }
         }
     }
 }

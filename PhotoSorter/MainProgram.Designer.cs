@@ -48,6 +48,7 @@
             this.outputFolderSelector = new System.Windows.Forms.FolderBrowserDialog();
             this.outputLabel = new System.Windows.Forms.Label();
             this.saveAndExitButton = new System.Windows.Forms.Button();
+            this.undoButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.CurrentPhotoBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,9 +64,9 @@
             // 
             // NextButton
             // 
-            this.NextButton.Location = new System.Drawing.Point(499, 508);
+            this.NextButton.Location = new System.Drawing.Point(545, 508);
             this.NextButton.Name = "NextButton";
-            this.NextButton.Size = new System.Drawing.Size(76, 48);
+            this.NextButton.Size = new System.Drawing.Size(64, 48);
             this.NextButton.TabIndex = 1;
             this.NextButton.Text = "Nästa";
             this.NextButton.UseVisualStyleBackColor = true;
@@ -158,9 +159,9 @@
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(335, 508);
+            this.deleteButton.Location = new System.Drawing.Point(405, 508);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(76, 48);
+            this.deleteButton.Size = new System.Drawing.Size(64, 48);
             this.deleteButton.TabIndex = 12;
             this.deleteButton.Text = "Ta bort";
             this.deleteButton.UseVisualStyleBackColor = true;
@@ -168,9 +169,9 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(417, 508);
+            this.saveButton.Location = new System.Drawing.Point(475, 508);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(76, 48);
+            this.saveButton.Size = new System.Drawing.Size(64, 48);
             this.saveButton.TabIndex = 13;
             this.saveButton.Text = "Spara";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -218,11 +219,22 @@
             this.saveAndExitButton.UseVisualStyleBackColor = true;
             this.saveAndExitButton.Click += new System.EventHandler(this.saveAndExitButton_Click);
             // 
+            // undoButton
+            // 
+            this.undoButton.Location = new System.Drawing.Point(335, 508);
+            this.undoButton.Name = "undoButton";
+            this.undoButton.Size = new System.Drawing.Size(64, 48);
+            this.undoButton.TabIndex = 18;
+            this.undoButton.Text = "Ångra";
+            this.undoButton.UseVisualStyleBackColor = true;
+            this.undoButton.Click += new System.EventHandler(this.undoButton_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 607);
+            this.Controls.Add(this.undoButton);
             this.Controls.Add(this.saveAndExitButton);
             this.Controls.Add(this.outputLabel);
             this.Controls.Add(this.outputBrowserButton);
@@ -272,6 +284,7 @@
         private System.Windows.Forms.FolderBrowserDialog outputFolderSelector;
         private System.Windows.Forms.Label outputLabel;
         private System.Windows.Forms.Button saveAndExitButton;
+        private System.Windows.Forms.Button undoButton;
     }
 }
 
