@@ -82,8 +82,6 @@ namespace PhotoSorter
                     heightTextBox.Text = null;
 
                     lastModifiedTextBox.Text = null;
-
-                    CurrentPhotoBox.Dispose();
                 }
             }
         }
