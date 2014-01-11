@@ -17,7 +17,7 @@ namespace PhotoSorter
         List<Picture> pictureInput = new List<Picture>();
         List<Picture> savedPictures = new List<Picture>();
         List<Picture> picturesForDeletion = new List<Picture>();
-        Picture undoBuffer;
+        Queue<Picture> undoQueue = new Queue<Picture>();
         FilePath outputFolder;
         int filesSaved = 0, filesDeleted = 0;
         public MainWindow(FilePath filePathIn, FilePath outputPathIn)
@@ -106,7 +106,7 @@ namespace PhotoSorter
         {
             if (pictureInput.Count() > 0)
             {
-                undoBuffer = pictureInput[0];
+                undoQueue.Enqueue(pictureInput[0]);
                 requestNextPicture();
             }
         }
@@ -116,7 +116,7 @@ namespace PhotoSorter
             if (pictureInput.Count() > 0)
             {
                 savedPictures.Add(pictureInput[0]);
-                undoBuffer = pictureInput[0];
+                undoQueue.Enqueue(pictureInput[0]);
                 requestNextPicture();
             }
         }
@@ -133,7 +133,7 @@ namespace PhotoSorter
             if (pictureInput.Count() > 0)
             {
                 picturesForDeletion.Add(pictureInput[0]);
-                undoBuffer = pictureInput[0];
+                undoQueue.Enqueue(pictureInput[0]);
                 requestNextPicture();
             }
         }
@@ -149,8 +149,9 @@ namespace PhotoSorter
 
         private void undoButton_Click(object sender, EventArgs e)
         {
-            if (undoBuffer != null)
+            if (undoQueue.Count() > 0)
             {
+                Picture undoBuffer = undoQueue.Dequeue();
                 savedPictures.Remove(undoBuffer);
 
                 picturesForDeletion.Remove(undoBuffer);
@@ -166,7 +167,7 @@ namespace PhotoSorter
 
                 lastModifiedTextBox.Text = pictureInput[0].lastModified.ToString();
 
-                undoBuffer = null;
+                
             }
         }
     }
