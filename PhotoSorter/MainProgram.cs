@@ -27,7 +27,9 @@ namespace PhotoSorter
             outputFolder = outputPathIn;
 
 
-            string[] files = FileUtillity.GetFiles(currentFolder.Text, "*.jpg").ToArray<string>();
+            string[] filesJPG = FileUtillity.GetFiles(currentFolder.Text, "*.jpg").ToArray<string>();
+            string[] filesPNG = FileUtillity.GetFiles(currentFolder.Text, "*.png").ToArray<string>();
+            string[] files = filesJPG.Concat(filesPNG).ToArray();
             foreach (string file in files)
             {
                 DateTime lastModified = File.GetLastWriteTime(file);
